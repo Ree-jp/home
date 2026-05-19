@@ -37,7 +37,7 @@
   <!-- Featured -->
   <a href="/blog/{featuredIndex}" class="group block w-full text-left mb-16 md:mb-24">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10">
-      <div class="md:col-span-7 relative aspect-[4/3] md:aspect-[16/10] overflow-hidden">
+      <div class="md:col-span-7 relative aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-2xl">
         <ImageWithFallback
           src={featured.image}
           alt={featured.title}
@@ -69,7 +69,7 @@
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 md:gap-y-16">
     {#each rest as { post, index }}
       <a href="/blog/{index}" class="group block w-full text-left">
-        <div class="relative aspect-[4/3] overflow-hidden mb-5">
+        <div class="relative aspect-[4/3] overflow-hidden rounded-2xl mb-5">
           <ImageWithFallback
             src={post.image}
             alt={post.title}

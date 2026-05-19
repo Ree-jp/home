@@ -44,7 +44,7 @@
       <p class="text-black/70 text-[16px] md:text-[18px] leading-relaxed mb-10">{post.excerpt}</p>
     </div>
 
-    <div class="relative aspect-[16/9] overflow-hidden mb-12">
+    <div class="relative aspect-[16/9] overflow-hidden rounded-2xl mb-12">
       <ImageWithFallback src={post.image} alt={post.title} class="w-full h-full object-cover" />
     </div>
 
@@ -116,7 +116,7 @@ function hello(name: string) {
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         {#each related as { post: r, index: i }}
           <a href="/blog/{i}" class="group block w-full text-left">
-            <div class="relative aspect-[4/3] overflow-hidden mb-4">
+            <div class="relative aspect-[4/3] overflow-hidden rounded-2xl mb-4">
               <ImageWithFallback
                 src={r.image}
                 alt={r.title}
