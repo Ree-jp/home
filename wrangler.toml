@@ -2,9 +2,11 @@ name = "home"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 workers_dev = false
+main = ".svelte-kit/cloudflare/_worker.js"
 
 [assets]
 directory = ".svelte-kit/cloudflare"
+binding = "ASSETS"
 
 [[routes]]
 pattern = "about.reesuke.com/*"
