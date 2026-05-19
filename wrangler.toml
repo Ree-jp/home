@@ -11,3 +11,10 @@ binding = "ASSETS"
 [[routes]]
 pattern = "about.reesuke.com/*"
 zone_name = "reesuke.com"
+
+[observability.logs]
+enabled = true
+invocation_logs = true
+
+[observability.traces]
+enabled = true
