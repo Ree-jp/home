@@ -1,5 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Reem+Kufi+Ink&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
 @import 'tailwindcss';
+
+/* Reem Kufi Ink を自己ホストしたローカルフォント。
+ *
+ * Google Fonts 版をそのまま使うと Safari でアラビア語に見える文字が発生する。
+ * 原因は Reem Kufi Ink が OpenType SVG カラーフォントであること。
+ * フォントファイルに埋め込まれた SVG テーブル（126グリフ）にアラビア語スタイルの
+ * SVG アートワークが含まれており、Safari はこれを優先レンダリングする。
+ * Chrome は TrueType アウトラインを使うためブラウザ間で見た目が異なっていた。
+ *
+ * static/fonts/reem-kufi-ink-latin.woff2 は以下の処理を施した独自ビルド:
+ *   1. unicode-range を Latin のみにサブセット化（56KB → 28KB）
+ *   2. SVG テーブルを削除 → 全ブラウザが TrueType アウトラインで描画（28KB → 11KB）
+ *   3. GSUB の arab スクリプトエントリを削除（念のため）
+ *
+ * i.e. Fuck Safari 
+ */
+@font-face {
+  font-family: 'Reem Kufi Ink';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/reem-kufi-ink-latin.woff2') format('woff2');
+}
 
 :root {
   --background: #fdfbf8;
