@@ -20,9 +20,17 @@
     >
       ← reesuke
     </a>
-    <p class="font-['Reem_Kufi_Ink',_sans-serif] text-[14px] md:text-[16px] text-black/50">
-      {posts.length} posts
-    </p>
+    <div class="flex items-center gap-6">
+      <a
+        href="/blog/archive"
+        class="font-['Reem_Kufi_Ink',_sans-serif] text-[14px] md:text-[16px] text-black/50 hover:text-black transition-colors underline underline-offset-4"
+      >
+        Archive →
+      </a>
+      <p class="font-['Reem_Kufi_Ink',_sans-serif] text-[14px] md:text-[16px] text-black/50">
+        {posts.length} posts
+      </p>
+    </div>
   </div>
 
   <div class="border-t-2 border-b border-black/80 py-8 md:py-12 mb-10 md:mb-16">
