@@ -6,17 +6,26 @@
 
   let { data }: { data: PageData } = $props();
 
+  function categoryParam(slugs: string[]): string {
+    return slugs.length > 0 ? `category=${slugs.map(encodeURIComponent).join(',')}` : '';
+  }
+
   function categoryHref(slug: string): string {
     const next = data.categorySlugs.includes(slug)
       ? data.categorySlugs.filter((s) => s !== slug)
       : [...data.categorySlugs, slug];
     if (next.length === 0) return '/blog/archive';
-    return '/blog/archive?' + next.map((s) => `category=${encodeURIComponent(s)}`).join('&');
+    return `/blog/archive?${categoryParam(next)}`;
   }
 
   function pageHref(p: number): string {
-    const categoryParams = data.categorySlugs.map((s) => `category=${encodeURIComponent(s)}`).join('&');
-    return categoryParams ? `/blog/archive?${categoryParams}&page=${p}` : `/blog/archive?page=${p}`;
+    const cat = categoryParam(data.categorySlugs);
+    return cat ? `/blog/archive?${cat}&page=${p}` : `/blog/archive?page=${p}`;
+  }
+
+  function postHref(slug: string): string {
+    const cat = categoryParam(data.categorySlugs);
+    return cat ? `/blog/archive/${slug}?${cat}` : `/blog/archive/${slug}`;
   }
 
   function getTitle(post: WPPost): string {
@@ -91,7 +100,7 @@
   {:else}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 md:gap-y-16">
       {#each data.posts as post}
-        <a href={post.link} target="_blank" rel="noopener noreferrer" class="group block w-full text-left">
+        <a href={postHref(post.slug)} class="group block w-full text-left">
           <div class="relative aspect-[4/3] overflow-hidden rounded-2xl mb-5">
             <ImageWithFallback
               src={getImage(post)}

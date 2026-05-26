@@ -5,7 +5,8 @@ import type { WPPost, WPCategory } from '$lib/types/wordpress';
 
 export const load: PageServerLoad = async ({ fetch, url }) => {
   const page = Number(url.searchParams.get('page') ?? '1');
-  const categorySlugs = url.searchParams.getAll('category');
+  const categoryParam = url.searchParams.get('category') ?? '';
+  const categorySlugs = categoryParam ? categoryParam.split(',').filter(Boolean) : [];
   const perPage = 12;
 
   const [categoryIds, categoriesRes] = await Promise.all([
@@ -31,7 +32,7 @@ export const load: PageServerLoad = async ({ fetch, url }) => {
 };
 
 async function resolveSlugsToIds(
-  fetch: typeof globalThis.fetch,
+  fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>,
   slugs: string[]
 ): Promise<number[]> {
   if (slugs.length === 0) return [];

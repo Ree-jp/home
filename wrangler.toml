@@ -9,8 +9,14 @@ directory = ".svelte-kit/cloudflare"
 binding = "ASSETS"
 
 [[routes]]
-pattern = "about.reesuke.com/*"
+pattern = "about.reesuke.com"
 zone_name = "reesuke.com"
+custom_domain = true
+enabled = true
+previews_enabled = false
+
+[vars]
+PUBLIC_WP_URL = "https://blog.ree-jp.net"
 
 [observability.logs]
 enabled = true

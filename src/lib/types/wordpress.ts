@@ -1,9 +1,11 @@
 export type WPPost = {
   id: number;
   date: string;
+  slug: string;
   link: string;
   title: { rendered: string };
   excerpt: { rendered: string };
+  content: { rendered: string };
   categories: number[];
   tags: number[];
   _embedded?: {
