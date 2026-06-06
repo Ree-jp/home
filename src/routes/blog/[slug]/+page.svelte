@@ -9,6 +9,9 @@
 
 <svelte:head>
   <title>{post.title} | reesuke</title>
+  {#if post.content.includes('twitter-tweet')}
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  {/if}
 </svelte:head>
 
 <div class="relative max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16 pt-[60px] pb-20">

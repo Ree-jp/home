@@ -1,5 +1,20 @@
 import { marked } from 'marked';
 
+const xUrlPattern = /^https?:\/\/(twitter\.com|x\.com)\/\w+\/status\/(\d+)[^\s]*$/;
+
+const renderer = new marked.Renderer();
+const originalParagraph = renderer.paragraph.bind(renderer);
+renderer.paragraph = (token) => {
+  const { tokens } = token;
+  if (tokens.length === 1 && tokens[0].type === 'link') {
+    const href = tokens[0].href.trim();
+    if (xUrlPattern.test(href)) {
+      return `<blockquote class="twitter-tweet"><a href="${href}"></a></blockquote>`;
+    }
+  }
+  return originalParagraph(token);
+};
+
 const files = import.meta.glob('/content/posts/*/article.md', { query: '?raw', import: 'default', eager: true });
 
 export type Post = {
@@ -55,7 +70,7 @@ export const posts: Post[] = Object.entries(files)
       image: data.image ? `/blog/${slug}/${data.image}` : fallbackImage(slug),
       featured: data.featured === true,
       readTime: calcReadTime(content),
-      content: marked(content) as string,
+      content: marked(content, { renderer }) as string,
     };
   })
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
