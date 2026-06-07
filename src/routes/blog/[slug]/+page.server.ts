@@ -15,7 +15,7 @@ export const load: PageServerLoad = ({ params, url }) => {
     .filter((p) => p.slug !== params.slug && !p.isPasswordProtected)
     .slice(0, 3);
 
-  const inputPassword = url.searchParams.get('password') ?? '';
+  const inputPassword = meta.isPasswordProtected ? (url.searchParams.get('password') ?? '') : '';
   const post = unlockPost(params.slug, inputPassword);
 
   return {

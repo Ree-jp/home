@@ -87,7 +87,7 @@ const rawPosts: RawPost[] = Object.entries(files)
       image: data.image ? `/blog/${slug}/${data.image}` : fallbackImage(slug),
       featured: data.featured === true && !data.password,
       readTime: calcReadTime(content),
-      content: marked(content, { renderer: createRenderer(slug) }) as string,
+      content: (marked(content, { renderer: createRenderer(slug) }) as string).replace(/<!--[\s\S]*?-->/g, ''),
       password: data.password ? String(data.password) : undefined,
     };
   })
