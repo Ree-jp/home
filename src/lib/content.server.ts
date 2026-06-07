@@ -41,7 +41,10 @@ export type Post = {
   featured: boolean;
   readTime: string;
   content: string;
+  isPasswordProtected: boolean;
 };
+
+type RawPost = Omit<Post, 'isPasswordProtected'> & { password?: string };
 
 function parseFrontmatter(raw: string): { data: Record<string, unknown>; content: string } {
   const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
@@ -71,7 +74,7 @@ function fallbackImage(slug: string): string {
   return `/images/blog/blog-0${n}.webp`;
 }
 
-export const posts: Post[] = Object.entries(files)
+const rawPosts: RawPost[] = Object.entries(files)
   .map(([path, raw]) => {
     const slug = path.match(/\/content\/posts\/(.+?)\/article\.md/)![1];
     const { data, content } = parseFrontmatter(raw as string);
@@ -82,13 +85,24 @@ export const posts: Post[] = Object.entries(files)
       category: String(data.category ?? ''),
       excerpt: String(data.excerpt ?? ''),
       image: data.image ? `/blog/${slug}/${data.image}` : fallbackImage(slug),
-      featured: data.featured === true,
+      featured: data.featured === true && !data.password,
       readTime: calcReadTime(content),
       content: marked(content, { renderer: createRenderer(slug) }) as string,
+      password: data.password ? String(data.password) : undefined,
     };
   })
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-export function getPostBySlug(slug: string): Post | undefined {
-  return posts.find((p) => p.slug === slug);
+export const posts: Post[] = rawPosts.map(({ password, ...rest }) => ({
+  ...rest,
+  isPasswordProtected: !!password,
+}));
+
+// パスワードが正しければコンテンツ付きで返す。保護なし記事はそのまま返す。
+export function unlockPost(slug: string, inputPassword: string): Post | undefined {
+  const raw = rawPosts.find((p) => p.slug === slug);
+  if (!raw) return undefined;
+  if (raw.password && raw.password !== inputPassword) return undefined;
+  const { password: _, ...rest } = raw;
+  return { ...rest, isPasswordProtected: !!raw.password };
 }

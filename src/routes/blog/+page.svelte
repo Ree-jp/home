@@ -1,11 +1,17 @@
 <script lang="ts">
   import Badge from '$lib/components/Badge.svelte';
   import ImageWithFallback from '$lib/components/ImageWithFallback.svelte';
-  import { posts } from '$lib/content';
+  import type { Post } from '$lib/content.server';
 
-  const featuredIndex = Math.max(0, posts.findIndex((p) => p.featured));
-  const featured = posts[featuredIndex];
-  const rest = posts.filter((_, i) => i !== featuredIndex);
+  let { data } = $props();
+  let posts = $derived(data.posts as Post[]);
+
+  let featured = $derived(
+    posts.find((p) => p.featured && !p.isPasswordProtected) ??
+    posts.find((p) => !p.isPasswordProtected) ??
+    posts[0]
+  );
+  let rest = $derived(posts.filter((p) => p !== featured));
 </script>
 
 <svelte:head>
@@ -100,6 +106,9 @@
             <span>{post.date}</span>
             <span>·</span>
             <span>{post.readTime}</span>
+            {#if post.isPasswordProtected}
+              <span class="ml-auto">🔒</span>
+            {/if}
           </div>
         </a>
       {/each}

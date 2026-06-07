@@ -1,15 +1,39 @@
 <script lang="ts">
   import Badge from '$lib/components/Badge.svelte';
   import ImageWithFallback from '$lib/components/ImageWithFallback.svelte';
+  import { page } from '$app/state';
+  import { goto } from '$app/navigation';
 
   let { data } = $props();
   let post = $derived(data.post);
   let related = $derived(data.related);
+
+  let passwordInput = $state('');
+
+  let isLocked = $derived(!data.unlocked);
+
+  $effect(() => {
+    if (data.unlocked && page.url.searchParams.has('password')) {
+      const clean = new URL(page.url.href);
+      clean.searchParams.delete('password');
+      history.replaceState(history.state, '', clean.toString());
+    }
+  });
+
+  function submitPassword() {
+    const url = new URL(page.url.href);
+    url.searchParams.set('password', passwordInput);
+    goto(url.toString());
+  }
+
+  function handleKeydown(e: KeyboardEvent) {
+    if (e.key === 'Enter') submitPassword();
+  }
 </script>
 
 <svelte:head>
   <title>{post.title} | reesuke</title>
-  {#if post.content.includes('twitter-tweet')}
+  {#if !isLocked && post.content.includes('twitter-tweet')}
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   {/if}
 </svelte:head>
@@ -37,6 +61,10 @@
         <span class="text-sm text-black/50">{post.date}</span>
         <span class="text-sm text-black/40">·</span>
         <span class="text-sm text-black/50">{post.readTime}</span>
+        {#if post.isPasswordProtected}
+          <span class="text-sm text-black/40">·</span>
+          <span class="text-xs text-black/40">🔒 protected</span>
+        {/if}
       </div>
 
       <h1 class="font-['Noto_Sans_JP',_sans-serif] text-[32px] md:text-[56px] leading-[1.15] text-black mb-6">
@@ -52,9 +80,36 @@
       </div>
     {/if}
 
-    <div class="prose-content text-black/85 text-[16px] md:text-[17px] leading-[1.9]">
-      {@html post.content}
-    </div>
+    {#if isLocked}
+      <div class="flex flex-col items-center justify-center py-20 gap-6">
+        <span class="text-5xl">🔒</span>
+        <p class="font-['Noto_Sans_JP',_sans-serif] text-[18px] text-black/70">
+          この記事はパスワードで保護されています
+        </p>
+        {#if data.wrongPassword}
+          <p class="text-sm text-red-500">パスワードが違います</p>
+        {/if}
+        <div class="flex gap-3 w-full max-w-sm">
+          <input
+            type="password"
+            placeholder="パスワードを入力"
+            bind:value={passwordInput}
+            onkeydown={handleKeydown}
+            class="flex-1 border border-black/30 rounded-none px-4 py-2 text-sm outline-none focus:border-black transition-colors"
+          />
+          <button
+            onclick={submitPassword}
+            class="px-5 py-2 bg-black text-white text-sm hover:bg-black/80 transition-colors"
+          >
+            解錠
+          </button>
+        </div>
+      </div>
+    {:else}
+      <div class="prose-content text-black/85 text-[16px] md:text-[17px] leading-[1.9]">
+        {@html post.content}
+      </div>
+    {/if}
 
     <div class="border-t border-black/20 mt-16 pt-8 flex items-center justify-between">
       <a
