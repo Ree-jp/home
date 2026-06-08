@@ -51,7 +51,7 @@
       <div class="rotate-[307.36deg]">
         <img
           alt=""
-          src="/images/icon.png"
+          src="/images/icon.webp"
           class="w-[120px] h-[120px] md:w-[176px] md:h-[176px] object-cover pointer-events-none"
         />
       </div>
