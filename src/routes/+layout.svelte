@@ -1,12 +1,16 @@
 <script lang="ts">
   import '../app.css';
+  import { onMount } from 'svelte';
   import { page } from '$app/state';
   import { fly } from 'svelte/transition';
   import type { Snippet } from 'svelte';
+  import { initTwemoji } from '$lib/twemoji';
 
   const SITE_URL = 'https://about.reesuke.com';
 
   let { children }: { children: Snippet } = $props();
+
+  onMount(() => initTwemoji());
 </script>
 
 <svelte:head>
@@ -23,4 +27,11 @@
       {@render children()}
     </div>
   {/key}
+
+  <footer
+    class="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16 py-8 flex items-center justify-between text-sm text-black/40"
+  >
+    <span>© reesuke</span>
+    <a href="/credits" class="hover:text-black transition-colors">Credits</a>
+  </footer>
 </div>

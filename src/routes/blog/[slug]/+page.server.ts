@@ -7,9 +7,13 @@ export const prerender = 'auto';
 export const entries: EntryGenerator = () =>
   posts.filter((p) => !p.isPasswordProtected).map((p) => ({ slug: p.slug }));
 
-export const load: PageServerLoad = ({ params, url }) => {
+export const load: PageServerLoad = ({ params, url, setHeaders }) => {
   const meta = posts.find((p) => p.slug === params.slug);
   if (!meta) throw error(404, '記事が見つかりません');
+
+  if (meta.isPasswordProtected) {
+    setHeaders({ 'cache-control': 'private, no-store' });
+  }
 
   const related = posts
     .filter((p) => p.slug !== params.slug && !p.isPasswordProtected)

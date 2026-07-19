@@ -9,6 +9,7 @@ const staticRoutes = [
   { url: '/', priority: '1.0', changefreq: 'monthly' },
   { url: '/blog', priority: '0.9', changefreq: 'daily' },
   { url: '/blog/archive', priority: '0.7', changefreq: 'weekly' },
+  { url: '/credits', priority: '0.3', changefreq: 'yearly' },
 ];
 
 async function fetchAllWpSlugs(fetchFn: typeof fetch): Promise<{ slug: string; date: string }[]> {

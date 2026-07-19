@@ -33,6 +33,9 @@
 
 <svelte:head>
   <title>{post.title} | reesuke</title>
+  {#if post.isPasswordProtected}
+    <meta name="robots" content="noindex,follow" />
+  {/if}
   {#if !isLocked && post.content.includes('twitter-tweet')}
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   {/if}

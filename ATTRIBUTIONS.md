@@ -1,3 +1,5 @@
-This Figma Make file includes components from [shadcn/ui](https://ui.shadcn.com/) used under [MIT license](https://github.com/shadcn-ui/ui/blob/main/LICENSE.md).
+This site includes emoji graphics from [Twemoji](https://github.com/jdecked/twemoji) (Copyright 2020 Twitter, Inc and other contributors, maintained by jdecked) used under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
-This Figma Make file includes photos from [Unsplash](https://unsplash.com) used under [license](https://unsplash.com/license).
+Fonts [Noto Sans JP](https://fonts.google.com/noto/specimen/Noto+Sans+JP) and [Reem Kufi Ink](https://fonts.google.com/specimen/Reem+Kufi+Ink) are used under the [SIL Open Font License 1.1](https://openfontlicense.org/).
+
+Icons from [Lucide](https://lucide.dev/) are used under the [ISC License](https://lucide.dev/license).
