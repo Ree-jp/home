@@ -5,11 +5,12 @@ export type Work = {
   type: string;
   description: string;
   tags: string[];
+  link?: string;
 };
 
 export const works: Work[] = [
   {
-    title: '採用管理WEBアプリ開発',
+    title: 'WEBアプリ開発',
     company: 'HRクラウド株式会社',
     period: '2025年3月〜2026年3月',
     type: '長期インターン',
@@ -29,7 +30,7 @@ export const works: Work[] = [
     company: 'ピクシブ株式会社',
     period: '2026年3月4日〜13日（8日間）',
     type: '就業型インターン',
-    description: 'Webサービス「Pixiv リクエスト」の就業型インターン。実際のプロダクト開発に参加。',
+    description: 'Webサービス「Pixiv リクエスト」の就業型インターン。',
     tags: ['PHP', 'Next.js']
   },
   {
@@ -46,7 +47,34 @@ export const works: Work[] = [
     company: '株式会社はてな',
     period: '2025年8月18日〜22日（1week）',
     type: '短期インターン',
-    description: 'はてなの技術力を活かした実践的なインターンプログラムに参加。',
-    tags: ['はてな']
+    description: '',
+    tags: []
+  },
+  {
+    title: 'LINEヤフーインターンシップ 2026',
+    company: 'LINEヤフー株式会社',
+    period: '2026年8月（3週間）',
+    type: '就業型インターン',
+    description: '',
+    tags: [],
+    link: 'https://www.lycorp.co.jp/ja/recruit/newgrads/internship/detail/SWE-4-37/'
+  },
+  {
+    title: 'Sansan エンジニアインターンシップ',
+    company: 'Sansan株式会社',
+    period: '2026年8月〜9月（4週間）',
+    type: '就業型インターン',
+    description: '',
+    tags: [],
+    link: 'https://newgradsevents.corp-sansan.com/engineer/200001'
+  },
+  {
+    title: 'RECRUIT INTERNSHIP for Engineers 2026',
+    company: '株式会社リクルートホールディングス',
+    period: '2026年10月〜11月（1ヶ月）',
+    type: '就業型インターン',
+    description: '',
+    tags: [],
+    link: 'https://www.recruit.co.jp/employment/students/internship/erintern'
   }
 ];

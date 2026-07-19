@@ -1,5 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&family=Noto+Sans+JP:wght@400;700;900&display=swap');
 @import 'tailwindcss';
+
+/* 絵文字を全OSで Noto Color Emoji に統一する。
+ * Google Fonts 版は unicode-range で細かく分割配信されるため、
+ * ページ内で実際に使われている絵文字を含むサブセットしか読み込まれない。
+ * 和文・欧文グリフはテキストフォント側が持っているので、
+ * スタックの末尾（generic の直前）に置けば絵文字だけがこのフォントに落ちる。
+ * Safari は COLRv1 未対応のため Apple Color Emoji にフォールバックする。 */
+@theme {
+  --font-sans: 'Noto Sans JP', 'Noto Color Emoji', sans-serif;
+  --font-display: 'Reem Kufi Ink', 'Noto Color Emoji', sans-serif;
+}
 
 /* Reem Kufi Ink を自己ホストしたローカルフォント。
  *
@@ -53,7 +64,7 @@
 .wp-content h4,
 .wp-content h5,
 .wp-content h6 {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Noto Sans JP', 'Noto Color Emoji', sans-serif;
   font-weight: 700;
   color: #000;
   margin-top: 2em;
@@ -145,14 +156,14 @@
 }
 
 .prose-content h2 {
-  font-family: 'Reem Kufi Ink', sans-serif;
+  font-family: 'Reem Kufi Ink', 'Noto Color Emoji', sans-serif;
   font-size: clamp(1.5rem, 4vw, 2rem);
   color: black;
   padding-top: 1rem;
   margin-bottom: 0.75rem;
 }
 .prose-content h3 {
-  font-family: 'Reem Kufi Ink', sans-serif;
+  font-family: 'Reem Kufi Ink', 'Noto Color Emoji', sans-serif;
   font-size: clamp(1.25rem, 3vw, 1.5rem);
   color: black;
   padding-top: 0.5rem;

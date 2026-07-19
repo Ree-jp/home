@@ -22,34 +22,34 @@
   <div class="flex items-center justify-between mb-10">
     <a
       href="/"
-      class="font-['Reem_Kufi_Ink',_sans-serif] text-[20px] md:text-[24px] text-black/60 hover:text-black transition-colors"
+      class="font-display text-[20px] md:text-[24px] text-black/60 hover:text-black transition-colors"
     >
       ← reesuke
     </a>
     <div class="flex items-center gap-6">
       <a
         href="/blog/archive"
-        class="font-['Reem_Kufi_Ink',_sans-serif] text-[14px] md:text-[16px] text-black/50 hover:text-black transition-colors underline underline-offset-4"
+        class="font-display text-[14px] md:text-[16px] text-black/50 hover:text-black transition-colors underline underline-offset-4"
       >
         Archive →
       </a>
-      <p class="font-['Reem_Kufi_Ink',_sans-serif] text-[14px] md:text-[16px] text-black/50">
+      <p class="font-display text-[14px] md:text-[16px] text-black/50">
         {posts.length} posts
       </p>
     </div>
   </div>
 
   <div class="border-t-2 border-b border-black/80 py-8 md:py-12 mb-10 md:mb-16">
-    <p class="font-['Reem_Kufi_Ink',_sans-serif] text-[14px] md:text-[16px] text-black/60 mb-2">
+    <p class="font-display text-[14px] md:text-[16px] text-black/60 mb-2">
       #Blog / Journal
     </p>
-    <h1 class="font-['Reem_Kufi_Ink',_sans-serif] text-[56px] md:text-[120px] leading-[0.9] text-black">
+    <h1 class="font-display text-[56px] md:text-[120px] leading-[0.9] text-black">
       Notes & Logs
     </h1>
   </div>
 
   {#if posts.length === 0}
-    <p class="font-['Reem_Kufi_Ink',_sans-serif] text-black/40 text-lg">No posts yet.</p>
+    <p class="font-display text-black/40 text-lg">No posts yet.</p>
   {:else}
     <!-- Featured -->
     <a href="/blog/{featured.slug}" class="group block w-full text-left mb-16 md:mb-24">
@@ -67,7 +67,7 @@
             <span class="text-black/60 text-sm">{featured.category}</span>
           </div>
           <h2
-            class="font-['Noto_Sans_JP',_sans-serif] text-[28px] md:text-[40px] leading-tight text-black mb-4 group-hover:underline decoration-2 underline-offset-4"
+            class="font-sans text-[28px] md:text-[40px] leading-tight text-black mb-4 group-hover:underline decoration-2 underline-offset-4"
           >
             {featured.title}
           </h2>
@@ -97,7 +97,7 @@
             </div>
           </div>
           <h3
-            class="font-['Noto_Sans_JP',_sans-serif] text-[20px] md:text-[22px] leading-snug text-black mb-3 group-hover:underline decoration-2 underline-offset-4"
+            class="font-sans text-[20px] md:text-[22px] leading-snug text-black mb-3 group-hover:underline decoration-2 underline-offset-4"
           >
             {post.title}
           </h3>

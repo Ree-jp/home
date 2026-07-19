@@ -42,13 +42,13 @@
   <div class="flex items-center justify-between mb-10">
     <a
       href="/blog"
-      class="font-['Reem_Kufi_Ink',_sans-serif] text-[20px] md:text-[24px] text-black/60 hover:text-black transition-colors"
+      class="font-display text-[20px] md:text-[24px] text-black/60 hover:text-black transition-colors"
     >
       ← Back to Blog
     </a>
     <a
       href="/"
-      class="font-['Reem_Kufi_Ink',_sans-serif] text-[14px] md:text-[16px] text-black/50 hover:text-black transition-colors"
+      class="font-display text-[14px] md:text-[16px] text-black/50 hover:text-black transition-colors"
     >
       ← reesuke
     </a>
@@ -67,7 +67,7 @@
         {/if}
       </div>
 
-      <h1 class="font-['Noto_Sans_JP',_sans-serif] text-[32px] md:text-[56px] leading-[1.15] text-black mb-6">
+      <h1 class="font-sans text-[32px] md:text-[56px] leading-[1.15] text-black mb-6">
         {post.title}
       </h1>
 
@@ -83,7 +83,7 @@
     {#if isLocked}
       <div class="flex flex-col items-center justify-center py-20 gap-6">
         <span class="text-5xl">🔒</span>
-        <p class="font-['Noto_Sans_JP',_sans-serif] text-[18px] text-black/70">
+        <p class="font-sans text-[18px] text-black/70">
           この記事はパスワードで保護されています
         </p>
         {#if data.wrongPassword}
@@ -114,7 +114,7 @@
     <div class="border-t border-black/20 mt-16 pt-8 flex items-center justify-between">
       <a
         href="/blog"
-        class="font-['Reem_Kufi_Ink',_sans-serif] text-[16px] md:text-[18px] text-black/60 hover:text-black transition-colors"
+        class="font-display text-[16px] md:text-[18px] text-black/60 hover:text-black transition-colors"
       >
         ← Back to Blog
       </a>
@@ -124,7 +124,7 @@
 
   {#if related.length > 0}
     <div class="mt-20 md:mt-28">
-      <p class="font-['Reem_Kufi_Ink',_sans-serif] text-[20px] md:text-[24px] text-black/80 mb-6">Read more</p>
+      <p class="font-display text-[20px] md:text-[24px] text-black/80 mb-6">Read more</p>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         {#each related as r}
           <a href="/blog/{r.slug}" class="group block w-full text-left">

@@ -3,6 +3,7 @@
   import type { WPPost } from '$lib/types/wordpress';
   import Badge from '$lib/components/Badge.svelte';
   import ImageWithFallback from '$lib/components/ImageWithFallback.svelte';
+  import { page } from '$app/state';
 
   let { data }: { data: PageData } = $props();
 
@@ -55,26 +56,29 @@
 
 <svelte:head>
   <title>Archive | reesuke</title>
+  {#if page.url.searchParams.has('category') || page.url.searchParams.has('page')}
+    <meta name="robots" content="noindex,follow" />
+  {/if}
 </svelte:head>
 
 <div class="relative max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16 pt-[60px] pb-20">
   <div class="flex items-center justify-between mb-10">
     <a
       href="/blog"
-      class="font-['Reem_Kufi_Ink',_sans-serif] text-[20px] md:text-[24px] text-black/60 hover:text-black transition-colors"
+      class="font-display text-[20px] md:text-[24px] text-black/60 hover:text-black transition-colors"
     >
       ← Blog
     </a>
-    <p class="font-['Reem_Kufi_Ink',_sans-serif] text-[14px] md:text-[16px] text-black/50">
+    <p class="font-display text-[14px] md:text-[16px] text-black/50">
       {data.total} posts
     </p>
   </div>
 
   <div class="border-t-2 border-b border-black/80 py-8 md:py-12 mb-10 md:mb-16">
-    <p class="font-['Reem_Kufi_Ink',_sans-serif] text-[14px] md:text-[16px] text-black/60 mb-2">
+    <p class="font-display text-[14px] md:text-[16px] text-black/60 mb-2">
       #WordPress / Archive
     </p>
-    <h1 class="font-['Reem_Kufi_Ink',_sans-serif] text-[56px] md:text-[120px] leading-[0.9] text-black">
+    <h1 class="font-display text-[56px] md:text-[120px] leading-[0.9] text-black">
       Archive
     </h1>
   </div>
@@ -84,7 +88,7 @@
       {#each data.categories as category}
         <a
           href={categoryHref(category.slug)}
-          class="font-['Reem_Kufi_Ink',_sans-serif] text-[13px] px-4 py-1.5 rounded-full border transition-colors duration-150
+          class="font-display text-[13px] px-4 py-1.5 rounded-full border transition-colors duration-150
             {data.categorySlugs.includes(category.slug)
               ? 'bg-black text-white border-black'
               : 'border-black/20 text-black/60 hover:border-black hover:text-black'}"
@@ -116,7 +120,7 @@
             {/if}
           </div>
           <h3
-            class="font-['Noto_Sans_JP',_sans-serif] text-[20px] md:text-[22px] leading-snug text-black mb-3 group-hover:underline decoration-2 underline-offset-4"
+            class="font-sans text-[20px] md:text-[22px] leading-snug text-black mb-3 group-hover:underline decoration-2 underline-offset-4"
           >
             {getTitle(post)}
           </h3>
@@ -134,18 +138,18 @@
         {#if data.page > 1}
           <a
             href={pageHref(data.page - 1)}
-            class="font-['Reem_Kufi_Ink',_sans-serif] text-[16px] text-black/60 hover:text-black transition-colors"
+            class="font-display text-[16px] text-black/60 hover:text-black transition-colors"
           >
             ← Prev
           </a>
         {/if}
-        <span class="font-['Reem_Kufi_Ink',_sans-serif] text-[14px] text-black/40">
+        <span class="font-display text-[14px] text-black/40">
           {data.page} / {data.totalPages}
         </span>
         {#if data.page < data.totalPages}
           <a
             href={pageHref(data.page + 1)}
-            class="font-['Reem_Kufi_Ink',_sans-serif] text-[16px] text-black/60 hover:text-black transition-colors"
+            class="font-display text-[16px] text-black/60 hover:text-black transition-colors"
           >
             Next →
           </a>

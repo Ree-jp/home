@@ -4,8 +4,14 @@
   import { fly } from 'svelte/transition';
   import type { Snippet } from 'svelte';
 
+  const SITE_URL = 'https://about.reesuke.com';
+
   let { children }: { children: Snippet } = $props();
 </script>
+
+<svelte:head>
+  <link rel="canonical" href="{SITE_URL}{page.url.pathname}" />
+</svelte:head>
 
 <div class="bg-[#fdfbf8] min-h-screen relative overflow-x-hidden">
   <div class="absolute top-[-32px] left-0 w-full pointer-events-none overflow-hidden" style="height: 65px;">

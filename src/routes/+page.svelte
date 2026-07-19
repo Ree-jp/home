@@ -3,7 +3,7 @@
   import Badge from '$lib/components/Badge.svelte';
   import { works } from '$lib/data/works';
   import { projects } from '$lib/data/projects';
-  import { experience } from '$lib/data/experience';
+  import { experience, experienceCategories } from '$lib/data/experience';
 
   let scrollY = $state(0);
   let iconRight = $derived(Math.max(-80 - scrollY * 0.3, -200));
@@ -39,7 +39,7 @@
 <div class="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16">
   <!-- Hero -->
   <div class="relative pt-[113px]">
-    <p class="font-['Noto_Sans_JP',_sans-serif] font-black text-[32px] md:text-[64px] text-black">
+    <p class="font-sans font-black text-[32px] md:text-[64px] text-black">
       こんにちは👋
     </p>
 
@@ -60,10 +60,10 @@
 
   <!-- About -->
   <div class="mt-12 md:mt-[110px]">
-    <p class="font-['Reem_Kufi_Ink',_sans-serif] text-[32px] md:text-[48px] text-black">#About</p>
+    <p class="font-display text-[32px] md:text-[48px] text-black">#About</p>
 
     <div class="mt-6 md:mt-[55px] md:ml-[100px] lg:ml-[150px]">
-      <p class="font-['Reem_Kufi_Ink',_sans-serif] leading-none text-[48px] md:text-[80px] text-black">
+      <p class="font-display leading-none text-[48px] md:text-[80px] text-black">
         reesuke
       </p>
 
@@ -109,7 +109,7 @@
           </a>
           <a
             href="/blog"
-            class="group ml-2 inline-flex items-center gap-2 h-10 px-3 rounded-full font-['Reem_Kufi_Ink',_sans-serif] text-[18px] md:text-[20px] leading-none text-black hover:bg-black hover:text-white transition-colors"
+            class="group ml-2 inline-flex items-center gap-2 h-10 px-3 rounded-full font-display text-[18px] md:text-[20px] leading-none text-black hover:bg-black hover:text-white transition-colors"
           >
             {@render iconBookOpen()}
             <span>#Blog</span>
@@ -122,10 +122,10 @@
 
   <!-- Product -->
   <div class="mt-12 md:mt-[75px]">
-    <p class="font-['Reem_Kufi_Ink',_sans-serif] text-[32px] md:text-[48px] text-black">#Product</p>
+    <p class="font-display text-[32px] md:text-[48px] text-black">#Product</p>
 
     <div class="mt-6 md:mt-[55px] md:ml-[100px] lg:ml-[150px]">
-      <p class="font-['Noto_Sans_JP',_sans-serif] text-[32px] md:text-[48px] text-black mb-8">作ってる</p>
+      <p class="font-sans text-[32px] md:text-[48px] text-black mb-8">作ってる 👾</p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[926px]">
         {#each projects as project}
@@ -166,10 +166,10 @@
 
   <!-- Works -->
   <div class="mt-12 md:mt-[75px]">
-    <p class="font-['Reem_Kufi_Ink',_sans-serif] text-[32px] md:text-[48px] text-black">#Works</p>
+    <p class="font-display text-[32px] md:text-[48px] text-black">#Works</p>
 
     <div class="mt-6 md:mt-[55px] md:ml-[100px] lg:ml-[150px]">
-      <p class="font-['Noto_Sans_JP',_sans-serif] text-[32px] md:text-[48px] text-black mb-8">働いてる</p>
+      <p class="font-sans text-[32px] md:text-[48px] text-black mb-8">働いてる 💪</p>
 
       <div class="max-w-[926px] space-y-6">
         {#each works as work}
@@ -177,7 +177,19 @@
             <div class="p-6">
               <div class="flex items-start justify-between gap-2 mb-1">
                 <h3 class="text-[18px] md:text-[20px]">{work.title}</h3>
-                <Badge variant="outline" class="text-xs text-black/50 shrink-0">{work.type}</Badge>
+                <div class="flex items-center gap-2 shrink-0">
+                  <Badge variant="outline" class="text-xs text-black/50">{work.type}</Badge>
+                  {#if work.link}
+                    <a
+                      href={work.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-black/30 hover:text-black transition-colors"
+                    >
+                      {@render iconExternalLink('sm')}
+                    </a>
+                  {/if}
+                </div>
               </div>
               <p class="text-black/50 text-sm mb-1">{work.company}</p>
               <p class="text-black/40 text-sm mb-3">{work.period}</p>
@@ -196,33 +208,39 @@
 
   <!-- Experience -->
   <div class="mt-12 md:mt-[75px]">
-    <p class="font-['Reem_Kufi_Ink',_sans-serif] text-[32px] md:text-[48px] text-black">#Experience</p>
+    <p class="font-display text-[32px] md:text-[48px] text-black">#Experience</p>
 
-    <div class="mt-6 md:mt-[55px] md:ml-[100px] lg:ml-[150px]">
-      <p class="font-['Noto_Sans_JP',_sans-serif] text-[32px] md:text-[48px] text-black mb-8">その他の経験</p>
+    <div class="mt-6 md:mt-[30px] md:ml-[100px] lg:ml-[150px]">
 
-      <div class="max-w-[926px] space-y-4">
-        {#each experience as exp}
-          <div class="flex items-start gap-4 py-4 border-b border-black/10 last:border-0">
-            <div class="shrink-0 w-2 h-2 rounded-full bg-black/30 mt-[10px]"></div>
-            <div class="flex-1 min-w-0">
-              <div class="flex items-start justify-between gap-2">
-                <p class="text-[16px] md:text-[18px] text-black">{exp.title}</p>
-                {#if exp.link}
-                  <a
-                    href={exp.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-black/30 hover:text-black transition-colors shrink-0 mt-1"
-                  >
-                    {@render iconExternalLink('sm')}
-                  </a>
-                {/if}
-              </div>
-              <p class="text-black/50 text-sm mt-1">{exp.period}</p>
-              {#if exp.role}
-                <Badge variant="outline" class="text-xs text-black/60 mt-2">{exp.role}</Badge>
-              {/if}
+      <div class="max-w-[926px] space-y-10">
+        {#each experienceCategories as category}
+          <div>
+            <p class="text-sm text-black/40 tracking-wider mb-2">{category}</p>
+            <div class="space-y-4">
+              {#each experience.filter((e) => e.category === category) as exp}
+                <div class="flex items-start gap-4 py-4 border-b border-black/10 last:border-0">
+                  <div class="shrink-0 w-2 h-2 rounded-full bg-black/30 mt-[10px]"></div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-start justify-between gap-2">
+                      <p class="text-[16px] md:text-[18px] text-black">{exp.title}</p>
+                      {#if exp.link}
+                        <a
+                          href={exp.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="text-black/30 hover:text-black transition-colors shrink-0 mt-1"
+                        >
+                          {@render iconExternalLink('sm')}
+                        </a>
+                      {/if}
+                    </div>
+                    <p class="text-black/50 text-sm mt-1">{exp.period}</p>
+                    {#if exp.role}
+                      <Badge variant="outline" class="text-xs text-black/60 mt-2">{exp.role}</Badge>
+                    {/if}
+                  </div>
+                </div>
+              {/each}
             </div>
           </div>
         {/each}
@@ -237,15 +255,15 @@
       class="group w-full border-t-2 border-b border-black/80 py-12 md:py-20 flex items-center justify-between hover:bg-black hover:text-white hover:border-black transition-colors px-4"
     >
       <div class="text-left">
-        <p class="font-['Reem_Kufi_Ink',_sans-serif] text-[14px] md:text-[16px] opacity-60 mb-2">
+        <p class="font-display text-[14px] md:text-[16px] opacity-60 mb-2">
           #Blog / Notes & Logs
         </p>
-        <p class="font-['Reem_Kufi_Ink',_sans-serif] text-[40px] md:text-[80px] leading-none">
+        <p class="font-display text-[40px] md:text-[80px] leading-none">
           Read the Blog
         </p>
       </div>
       <span
-        class="font-['Reem_Kufi_Ink',_sans-serif] text-[40px] md:text-[80px] leading-none transition-transform group-hover:translate-x-2"
+        class="font-display text-[40px] md:text-[80px] leading-none transition-transform group-hover:translate-x-2"
       >
         →
       </span>
