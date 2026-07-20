@@ -208,7 +208,7 @@ img.emoji {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.prose-content img {
+.prose-content img:not(.emoji) {
   max-width: 100%;
   border-radius: 0.75rem;
   margin: 1.5rem 0;
