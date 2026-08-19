@@ -3,7 +3,6 @@
   import type { WPPost } from '$lib/types/wordpress';
   import ImageWithFallback from '$lib/components/ImageWithFallback.svelte';
   import Badge from '$lib/components/Badge.svelte';
-  import { page } from '$app/state';
 
   let { data }: { data: PageData } = $props();
 
@@ -35,9 +34,8 @@
 
 <svelte:head>
   <title>{title} | reesuke</title>
-  {#if page.url.searchParams.has('category')}
-    <meta name="robots" content="noindex,follow" />
-  {/if}
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="canonical" href="https://about.reesuke.com/blog/archive" />
 </svelte:head>
 
 <div class="relative max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16 pt-[60px] pb-20">
@@ -59,6 +57,10 @@
   </div>
 
   <article class="max-w-[820px] mx-auto">
+    <div class="bg-amber-50 border border-amber-200 text-amber-900 rounded-xl px-5 py-4 mb-8 text-sm leading-relaxed">
+      以前運営していたブログの記事をそのままアーカイブしています。内容は当時のままで、運営していたサーバーに関する情報が多めです。
+    </div>
+
     <div class="border-t-2 border-black/80 pt-8 mb-6">
       <div class="flex items-center gap-3 mb-6">
         {#if category}

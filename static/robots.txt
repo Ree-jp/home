@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /blog/archive?*
+Allow: /
+
+Sitemap: https://about.reesuke.com/sitemap.xml
